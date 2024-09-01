@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<h3 class="title is-3 padding-top-10">ログインフォーム</h3>
+<p>{{ error }}</p>
+<form method="post" action="{{ 'accounts:login'|url() }}">        
+  <p>
+    <label for="id_username">ユーザー名:</label>
+    <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </p>
+  <p>
+    <label for="id_password">パスワード:</label>
+    <input type="password" name="passwd" autocomplete="current-password" required id="id_passwd">
+  </p>
+  <button type="submit" class="button is-link">ログイン</button>
+  {# <a href="{{ 'wiki:index'|url() }}" class="button is-link">ホームに戻る</a> #}
+  <a href="{{ 'accounts:signup'|url() }}" class="button is-link is-light">アカウント作成フォーム</a>
+</form>
+{% endblock %}

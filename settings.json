@@ -1,0 +1,37 @@
+{
+  "name": "WikiProject",
+  "stack":"wiki",
+  "environment":"stg",
+  "target":"build/project/python/lib/python3.12/site-packages",
+  "layer":{
+    "name":"layer-wiki-project",
+    "version":"latest",
+    "directory":"build/project",
+    "path":"python/lib/python3.12/site-packages"
+  },
+  "latest_version":"latest_version.json",
+  "python":{
+    "version": "3.12"
+  },
+  "pip":{
+    "target":"build/external/python/lib/python3.12/site-packages",
+    "layer":{
+      "name":"layer-wiki-external",
+      "version":"latest",
+      "directory":"build/external",
+      "path":"python/lib/python3.12/site-packages"
+    }
+  },
+  "handlers":{
+    "directory":"build/handlers",
+    "version":"latest"
+  },
+  "S3":{
+    "bucket":"hakira0627-wiki-stg",
+    "key":"had"
+  },
+  "CloudFormation":{
+    "stack_name":"stack-wiki-stg",
+    "template":"cfn-template.yaml"
+  }
+}
