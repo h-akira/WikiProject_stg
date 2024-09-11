@@ -66,9 +66,9 @@
         </div>
       </div>
       <div class="tree">
-        {# {% for html in nav_tree_htmls %} #}
-        {# {{ html | safe  }} #}
-        {# {% endfor %} #}
+        {% for html in nav_tree_htmls %}
+        {{ html | safe  }}
+        {% endfor %}
       </div>
     </div>
   </aside>
