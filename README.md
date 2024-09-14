@@ -10,7 +10,7 @@ AWSのサービスを利用してサーバーレスで構築されている。
   - バケットポリシーの内容はマネジメントコンソールCloudFrontのページから取得できる
 - CloudFrontは独自ドメインを用いるが、Route53のホストゾーンは別途作成してそこにレコードを登録する必要がある
 - ACMで証明書も作成しておく必要がある（`add.yaml`中でarnが指定されている）
-- API GatewayがCloudFront以外から直接アクセスされることを防ぐためにはAPI Gatewayに下記のリソースポリシーを手動で設定する
+- API GatewayがCloudFront以外から直接アクセスされることを防ぐためにはCloudFrontでヘッダーに任意の複雑文字列が追加れれるように設定を手動で加えたうえで、上でAPI Gatewayに下記のリソースポリシーを手動で設定する
 ```
 {
   "Version": "2012-10-17",
@@ -22,7 +22,7 @@ AWSのサービスを利用してサーバーレスで構築されている。
       "Resource": "arn:aws:execute-api:ap-northeast-1:アカウントのID:APIのID/*/*/*",
       "Condition": {
         "StringNotEquals": {
-          "aws:Referer": "a22Gds3goG2"
+          "aws:Referer": "任意の複雑な文字列"
         }
       }
     },
