@@ -1,0 +1,158 @@
+  CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d:
+    UpdateReplacePolicy: "Delete"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Delete"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy with caching disabled"
+        MinTTL: 0
+        MaxTTL: 0
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: false
+          HeadersConfig:
+            HeaderBehavior: "none"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: false
+        DefaultTTL: 0
+        Name: "CachePolicy-sac-stg-CachingDisabled"
+  CloudFrontCachePolicy00658327eaf89d4faba63d7e88639e58f600HsEaA:
+    UpdateReplacePolicy: "Delete"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Delete"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy with caching enabled. Supports Gzip and Brotli compression."
+        MinTTL: 1
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "none"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 86400
+        Name: "CachePolicy-sac-stg-CachingOptimized"
+  CloudFrontDistribution00E3HOC5L5YP5QZZ00CHp8o:
+    UpdateReplacePolicy: "Delete"
+    Type: "AWS::CloudFront::Distribution"
+    DeletionPolicy: "Delete"
+    Properties:
+      DistributionConfig:
+        Logging:
+          IncludeCookies: false
+          Bucket: ""
+          Prefix: ""
+        Comment: ""
+        DefaultRootObject: ""
+        Origins:
+        - ConnectionTimeout: 10
+          OriginAccessControlId: ""
+          ConnectionAttempts: 3
+          DomainName: !Sub
+            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+          OriginShield:
+            Enabled: false
+          OriginPath: "/stage-01"
+          Id: !Sub
+            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+          CustomOriginConfig:
+            OriginKeepaliveTimeout: 5
+            OriginReadTimeout: 30
+            OriginSSLProtocols:
+            - "TLSv1.2"
+            HTTPSPort: 443
+            HTTPPort: 80
+            OriginProtocolPolicy: "https-only"
+        - ConnectionTimeout: 10
+          OriginAccessControlId:
+            Ref: "CloudFrontOriginAccessControl00E5GYCGAIFNXZI00ZiPiS"
+          ConnectionAttempts: 3
+          OriginCustomHeaders: []
+          DomainName: "hakira0627-wiki-stg.s3.ap-northeast-1.amazonaws.com"
+          OriginShield:
+            Enabled: false
+          S3OriginConfig:
+            OriginAccessIdentity: ""
+          OriginPath: "/had/CloudFront"
+          Id: "hakira0627-wiki-stg.s3.ap-northeast-1.amazonaws.com"
+        ViewerCertificate:
+          MinimumProtocolVersion: "TLSv1.2_2021"
+          SslSupportMethod: "sni-only"
+          AcmCertificateArn: "arn:aws:acm:us-east-1:534449283880:certificate/fabe1cd1-2e55-4727-b521-9dfe823c0291"
+        PriceClass: "PriceClass_All"
+        DefaultCacheBehavior:
+          Compress: true
+          TrustedKeyGroups: []
+          FunctionAssociations: []
+          AllowedMethods:
+          - "HEAD"
+          - "DELETE"
+          - "POST"
+          - "GET"
+          - "OPTIONS"
+          - "PUT"
+          - "PATCH"
+          CachedMethods:
+          - "HEAD"
+          - "GET"
+          LambdaFunctionAssociations: []
+          SmoothStreaming: false
+          TargetOriginId: !Sub
+            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+          ViewerProtocolPolicy: "redirect-to-https"
+          CachePolicyId:
+            Ref: "CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d"
+          TrustedSigners: []
+          FieldLevelEncryptionId: ""
+        Staging: false
+        CustomErrorResponses: []
+        ContinuousDeploymentPolicyId: ""
+        OriginGroups:
+          Quantity: 0
+          Items: []
+        Enabled: true
+        Aliases:
+        - "wiki.h-akira.net"
+        IPV6Enabled: true
+        WebACLId: ""
+        HttpVersion: "http2and3"
+        Restrictions:
+          GeoRestriction:
+            Locations: []
+            RestrictionType: "none"
+        CacheBehaviors:
+        - Compress: true
+          FunctionAssociations: []
+          LambdaFunctionAssociations: []
+          TargetOriginId: "hakira0627-wiki-stg.s3.ap-northeast-1.amazonaws.com"
+          ViewerProtocolPolicy: "redirect-to-https"
+          TrustedSigners: []
+          FieldLevelEncryptionId: ""
+          TrustedKeyGroups: []
+          AllowedMethods:
+          - "HEAD"
+          - "GET"
+          PathPattern: "/static/*"
+          CachedMethods:
+          - "HEAD"
+          - "GET"
+          SmoothStreaming: false
+          CachePolicyId:
+            Ref: "CloudFrontCachePolicy00658327eaf89d4faba63d7e88639e58f600HsEaA"
+  CloudFrontOriginAccessControl00E5GYCGAIFNXZI00ZiPiS:
+    UpdateReplacePolicy: "Delete"
+    Type: "AWS::CloudFront::OriginAccessControl"
+    DeletionPolicy: "Delete"
+    Properties:
+      OriginAccessControlConfig:
+        SigningBehavior: "always"
+        Description: ""
+        SigningProtocol: "sigv4"
+        OriginAccessControlOriginType: "s3"
+        Name: "oac-sac-stg"
