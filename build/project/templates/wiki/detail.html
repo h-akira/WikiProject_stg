@@ -17,20 +17,28 @@
       (最終更新:{{ item.last_updated }})
     </p>
     <p>
-    {% if not from_share_code and item.share %}
+    {% if from_share_code or not item.share %}
     <span hidden>
     {% endif %}
     <a id="share-link" href="{{ 'wiki:share_detail'|url(share_code=item.share_code) }}" class="button is-light is-link">
       共有ページ
     </a>
-    {% if not from_share_code and item.share %}
+    {% if from_share_code or not item.share %}
     </span>
     {% endif %}
+    {% if item.share %}
     <button id="copy-button" class="button is-info is-light">
       共有URLをコピー
     </button>
-    {% if not from_share_code %}
-    {# <a href="{% url 'Wiki:update' username slug %}" class="button is-light"> #}
+    {% endif %}
+    {% if from_share_code %}
+    {% if item.share_edit_permission %}
+    <a href="{{ "wiki:share_edit"|url(share_code=item.share_code) }}" class="button is-light">
+      編集
+    </a>
+    {% endif %}
+    {% else %}
+    {% if request.username == item.username or item.edit_permission %}
     <a href="{{ "wiki:edit"|url_for_slug(username=item.username, slug=item.slug) }}" class="button is-light">
       編集
       {% if not item.edit_permission %}
@@ -38,13 +46,7 @@
       {% endif %}
     </a>
     {% endif %}
-    {# {% if item.share and item.share_edit_permission %} #}
-    {# {% if share and item.share_edit_permission %} #}
-    {# {# <a href="{% url 'Wiki:share_update' share_code %}" class="button is-light"> #} #}
-    {# <a href="#" class="button is-light"> #}
-    {#   編集 #}
-    {# </a> #}
-    {# {% endif %} #}
+    {% endif %}
     </p>
   </div>
 </div>

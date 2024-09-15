@@ -16,25 +16,26 @@
 {# {{ 'wiki:edit'|url_for_slug(username=item.username, slug=item.slug) }} #}
 <div class="padding-side padding-top-10">
   {% if type == "share_edit" %}
-  <form class="" action="{{ 'wiki:share_edit'|url_for_slug(share_code=item.share_code) }}" method="post">
-    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
-    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
-    <a href="{{'wiki:share_detail'|url_for_slug(share_code) }}" class="button is-link is-light">戻る</a>
+  <form class="" action="{{ 'wiki:share_edit'|url(share_code=item.share_code) }}" method="post">
+    <button type="submit" name="action" value="end" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="continue" class="button is-link">保存して継続</button>
+    <a href="{{'wiki:share_detail'|url(share_code=item.share_code) }}" class="button is-link is-light">戻る</a>
   {% elif type == "edit" %}
   <form class="" action="{{ 'wiki:edit'|url_for_slug(username=item.username, slug=item.slug) }}" method="post">
-    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
-    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
+    <button type="submit" name="action" value="end" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="continue" class="button is-link">保存して継続</button>
     <a href="{{'wiki:detail'|url_for_slug(username=item.username, slug=item.slug) }}" class="button is-link is-light">戻る</a>
   {% elif type == "create" %}
   <form class="" action="{{ 'wiki:create'|url() }}" method="post">
-    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
-    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
+    <button type="submit" name="action" value="end" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="continue" class="button is-link">保存して継続</button>
   {% endif %}
     {% if error_message %}
     <p>{{ error_message }}</p>
     {% endif %}
     <p>タイトル：</p>
     <p>{{ form.title }}</p>
+    {% if type != "share_edit" %}
     <p>スラッグ：{{ form.slug }}</p>
     <p>優先度　：{{ form.priority }}</p>
     <p>公開　　：{{ form.public }}</p>
@@ -43,6 +44,7 @@
     <p id="share-code-p">共有コード　：{{ form.share_code }}</p>
     <br>
     <p id="share-edit-permission-p">共有編集許可：{{ form.share_edit_permission }}</p>
+    {% endif %}
     {# <div id="editor"> #}
     <div class="content">
       {{ form.text }}
@@ -67,7 +69,7 @@
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 <script>hljs.highlightAll();</script>
-{% if author %}
+{% if type != "share_edit" %}
 <script src="{{ 'static:js'|url(item='edit_permission.js') }}"></script>
 <script src="{{ 'static:js'|url(item='share_edit_permission.js') }}"></script>
 {% endif %}
