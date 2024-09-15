@@ -25,6 +25,9 @@
     <button type="submit" name="action" value="end" class="button is-link">保存して終了</button>
     <button type="submit" name="action" value="continue" class="button is-link">保存して継続</button>
     <a href="{{'wiki:detail'|url_for_slug(username=item.username, slug=item.slug) }}" class="button is-link is-light">戻る</a>
+    {% if request.username == item.username %}
+    <a class="button js-modal-trigger is-link is-light" data-target="delete">削除</a>
+    {% endif %}
   {% elif type == "create" %}
   <form class="" action="{{ 'wiki:create'|url() }}" method="post">
     <button type="submit" name="action" value="end" class="button is-link">保存して終了</button>
@@ -60,9 +63,9 @@
       </script>
     </div>
   </form>
-  {# {%if type == "update" %} #}
-  {# {% include 'Wiki/delete_modal.html' %} #}
-  {# {% endif %} #}
+  {% if type == "edit" and request.username == item.username %}
+  {% include 'wiki/delete_modal.html' %}
+  {% endif %}
 </div>
 {% endblock content %}
 
@@ -73,7 +76,7 @@
 <script src="{{ 'static:js'|url(item='edit_permission.js') }}"></script>
 <script src="{{ 'static:js'|url(item='share_edit_permission.js') }}"></script>
 {% endif %}
-{# {%if type == "update" %} #}
-{# <script src="{% static 'js/modal.js' %}"></script> #}
-{# {% endif %} #}
+{% if type == "edit" and request.username == item.username %}
+<script src="{{ 'static:js'|url(item='modal.js') }}"></script>
+{% endif %}
 {% endblock extra_js %}
