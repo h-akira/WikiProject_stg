@@ -12,23 +12,24 @@
 {% block title %}編集{% endblock title %}
 
 {% block content %}
+{# {{ item.username }} #}
+{# {{ 'wiki:edit'|url_for_slug(username=item.username, slug=item.slug) }} #}
 <div class="padding-side padding-top-10">
-  {# {% if share_edit %} #}
-  {# <form class="" action="{{ 'wiki:share_update'|url(share_code=share_code) }}" method="post"> #}
-  {#   <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button> #}
-  {#   <button type="submit" name="action" value="update" class="button is-link">保存して継続</button> #}
-  {#   <a href="{{'wiki:share_detail'|url(share_code) }}" class="button is-link is-light">戻る</a> #}
-  {# {% elif type == "create" or type != "update" %} #}
+  {% if type == "share_edit" %}
+  <form class="" action="{{ 'wiki:share_edit'|url_for_slug(share_code=item.share_code) }}" method="post">
+    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
+    <a href="{{'wiki:share_detail'|url_for_slug(share_code) }}" class="button is-link is-light">戻る</a>
+  {% elif type == "edit" %}
+  <form class="" action="{{ 'wiki:edit'|url_for_slug(username=item.username, slug=item.slug) }}" method="post">
+    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
+    <a href="{{'wiki:detail'|url_for_slug(username=item.username, slug=item.slug) }}" class="button is-link is-light">戻る</a>
+  {% elif type == "create" %}
   <form class="" action="{{ 'wiki:create'|url() }}" method="post">
     <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
     <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
-  {# {% else %} #}
-  {# <form class="" action="{% url 'Wiki:update' username slug %}" method="post"> #}
-  {#   <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button> #}
-  {#   <button type="submit" name="action" value="update" class="button is-link">保存して継続</button> #}
-  {#   <a href="{% url 'Wiki:detail' username slug %}" class="button is-link is-light">戻る</a> #}
-  {#   <a class="button js-modal-trigger is-link is-light" data-target="delete">削除</a> #}
-  {# {% endif %} #}
+  {% endif %}
     {% if error_message %}
     <p>{{ error_message }}</p>
     {% endif %}

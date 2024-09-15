@@ -2,6 +2,7 @@
   "name": "WikiProject",
   "stack":"wiki",
   "environment":"stg",
+  "region":"ap-northeast-1",
   "target":"build/project/python/lib/python3.12/site-packages",
   "layer":{
     "name":"layer-wiki-project",

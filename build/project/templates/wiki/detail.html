@@ -13,9 +13,9 @@
       <i class="bi bi-lock"></i>
       {% endif %}
     </h1>
-    {# <p> #}
-    {#   (最終更新:{{ item.last_updated }}) #}
-    {# </p> #}
+    <p>
+      (最終更新:{{ item.last_updated }})
+    </p>
     <p>
     {% if not from_share_code and item.share %}
     <span hidden>
@@ -29,15 +29,15 @@
     <button id="copy-button" class="button is-info is-light">
       共有URLをコピー
     </button>
-    {# {% if not share and edit %} #}
-    {# {# <a href="{% url 'Wiki:update' username slug %}" class="button is-light"> #} #}
-    {# <a href="#" class="button is-light"> #}
-    {#   編集 #}
-    {#   {% if not item.edit_permission %} #}
-    {#   <i class="bi bi-lock"></i> #}
-    {#   {% endif %} #}
-    {# </a> #}
-    {# {% endif %} #}
+    {% if not from_share_code %}
+    {# <a href="{% url 'Wiki:update' username slug %}" class="button is-light"> #}
+    <a href="{{ "wiki:edit"|url_for_slug(username=item.username, slug=item.slug) }}" class="button is-light">
+      編集
+      {% if not item.edit_permission %}
+      <i class="bi bi-lock"></i>
+      {% endif %}
+    </a>
+    {% endif %}
     {# {% if item.share and item.share_edit_permission %} #}
     {# {% if share and item.share_edit_permission %} #}
     {# {# <a href="{% url 'Wiki:share_update' share_code %}" class="button is-light"> #} #}
