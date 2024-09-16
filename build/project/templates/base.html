@@ -31,10 +31,10 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" href="{{ 'wiki:index'|url() }}">ホーム</a>
-        <a class="navbar-item sidebar-toggle" role="button">記事</a>
+        <a class="navbar-item sidebar-toggle" role="button">記事一覧</a>
         {% if request.auth %}
         <a class="navbar-item" href="{{ 'wiki:create'|url() }}">新規作成</a>
-        <a class="navbar-item" href="#">編集</a>
+        <!-- <a class="navbar-item" href="#">編集</a> -->
         {% endif %}
       </div>
       <div class="navbar-end">

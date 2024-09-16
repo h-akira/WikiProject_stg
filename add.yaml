@@ -1,3 +1,19 @@
+  CloudFrontOriginRequestPolicy:
+    UpdateReplacePolicy: "Delete"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Delete"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "all"
+        Comment: "Policy to forward all parameters in viewer requests except for the Host header"
+        HeadersConfig:
+          HeaderBehavior: "allExcept"
+          Headers:
+          - "host"
+        CookiesConfig:
+          CookieBehavior: "all"
+        Name: "OriginRequestPolicy-sac-stg-AllViewerExceptHostHeader"
   CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d:
     UpdateReplacePolicy: "Delete"
     Type: "AWS::CloudFront::CachePolicy"
@@ -108,6 +124,8 @@
           ViewerProtocolPolicy: "redirect-to-https"
           CachePolicyId:
             Ref: "CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d"
+          OriginRequestPolicyId:
+            Ref: "CloudFrontOriginRequestPolicy"
           TrustedSigners: []
           FieldLevelEncryptionId: ""
         Staging: false
