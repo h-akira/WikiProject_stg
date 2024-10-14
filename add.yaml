@@ -13,7 +13,7 @@
           - "host"
         CookiesConfig:
           CookieBehavior: "all"
-        Name: "OriginRequestPolicy-sac-stg-AllViewerExceptHostHeader"
+        Name: "OriginRequestPolicy-wiki-stg-AllViewerExceptHostHeader"
   CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d:
     UpdateReplacePolicy: "Delete"
     Type: "AWS::CloudFront::CachePolicy"
@@ -33,7 +33,7 @@
             CookieBehavior: "none"
           EnableAcceptEncodingGzip: false
         DefaultTTL: 0
-        Name: "CachePolicy-sac-stg-CachingDisabled"
+        Name: "CachePolicy-wiki-stg-CachingDisabled"
   CloudFrontCachePolicy00658327eaf89d4faba63d7e88639e58f600HsEaA:
     UpdateReplacePolicy: "Delete"
     Type: "AWS::CloudFront::CachePolicy"
@@ -53,7 +53,7 @@
             CookieBehavior: "none"
           EnableAcceptEncodingGzip: true
         DefaultTTL: 86400
-        Name: "CachePolicy-sac-stg-CachingOptimized"
+        Name: "CachePolicy-wiki-stg-CachingOptimized"
   CloudFrontDistribution00E3HOC5L5YP5QZZ00CHp8o:
     UpdateReplacePolicy: "Delete"
     Type: "AWS::CloudFront::Distribution"
@@ -173,4 +173,4 @@
         Description: ""
         SigningProtocol: "sigv4"
         OriginAccessControlOriginType: "s3"
-        Name: "oac-sac-stg"
+        Name: "oac-wiki-stg"
