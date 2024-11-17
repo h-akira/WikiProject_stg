@@ -71,12 +71,30 @@
           OriginAccessControlId: ""
           ConnectionAttempts: 3
           DomainName: !Sub
-            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstg}.execute-api.ap-northeast-1.amazonaws.com"
           OriginShield:
             Enabled: false
           OriginPath: "/stage-01"
           Id: !Sub
-            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstg}.execute-api.ap-northeast-1.amazonaws.com"
+          CustomOriginConfig:
+            OriginKeepaliveTimeout: 5
+            OriginReadTimeout: 30
+            OriginSSLProtocols:
+            - "TLSv1.2"
+            HTTPSPort: 443
+            HTTPPort: 80
+            OriginProtocolPolicy: "https-only"
+        - ConnectionTimeout: 10
+          OriginAccessControlId: ""
+          ConnectionAttempts: 3
+          DomainName: !Sub
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstgQx6QqXbinary}.execute-api.ap-northeast-1.amazonaws.com"
+          OriginShield:
+            Enabled: false
+          OriginPath: "/stage-01"
+          Id: !Sub
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstgQx6QqXbinary}.execute-api.ap-northeast-1.amazonaws.com"
           CustomOriginConfig:
             OriginKeepaliveTimeout: 5
             OriginReadTimeout: 30
@@ -120,7 +138,7 @@
           LambdaFunctionAssociations: []
           SmoothStreaming: false
           TargetOriginId: !Sub
-            "${MyApiGateway}.execute-api.ap-northeast-1.amazonaws.com"
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstg}.execute-api.ap-northeast-1.amazonaws.com"
           ViewerProtocolPolicy: "redirect-to-https"
           CachePolicyId:
             Ref: "CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d"
@@ -163,6 +181,32 @@
           SmoothStreaming: false
           CachePolicyId:
             Ref: "CloudFrontCachePolicy00658327eaf89d4faba63d7e88639e58f600HsEaA"
+        - Compress: true
+          FunctionAssociations: []
+          LambdaFunctionAssociations: []
+          TargetOriginId: !Sub
+            "${MyApiGatewayapiQx6QqXwikiQx6QqXstgQx6QqXbinary}.execute-api.ap-northeast-1.amazonaws.com"
+          ViewerProtocolPolicy: "redirect-to-https"
+          TrustedSigners: []
+          FieldLevelEncryptionId: ""
+          TrustedKeyGroups: []
+          AllowedMethods:
+          - "HEAD"
+          - "DELETE"
+          - "POST"
+          - "GET"
+          - "OPTIONS"
+          - "PUT"
+          - "PATCH"
+          CachedMethods:
+          - "HEAD"
+          - "GET"
+          PathPattern: "/storage/*"
+          SmoothStreaming: false
+          CachePolicyId:
+            Ref: "CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00fdH1d"
+          OriginRequestPolicyId:
+            Ref: "CloudFrontOriginRequestPolicy"
   CloudFrontOriginAccessControl00E5GYCGAIFNXZI00ZiPiS:
     UpdateReplacePolicy: "Delete"
     Type: "AWS::CloudFront::OriginAccessControl"
