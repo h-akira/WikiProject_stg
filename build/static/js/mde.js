@@ -1,6 +1,6 @@
 /* EasyMDEの設定は画像アップロードに関わる部分に絞っています。 */
 var _imageMaxSize = 1024 * 1024 * 2;  // 画像サイズは2MBまで
-var _imageAccept = ['image/jpeg', 'image/png', 'image/gif'];  // JPEG,PNG,GIFを許可
+var _imageAccept = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];  // JPEG,PNG,GIFを許可
 
 /**
  * EasyMDEの初期化
@@ -62,7 +62,7 @@ function uploadImage(file, onSuccess, onError) {
     });
     // };
     $.ajax({
-      url: '/storage/' + username, // 実際のエンドポイントに変更
+      url: '/storage/post/' + username, // 実際のエンドポイントに変更
       type: 'POST',
       contentType: 'application/json',
       data: payload,
