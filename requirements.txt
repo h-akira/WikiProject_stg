@@ -2,7 +2,7 @@ beautifulsoup4==4.12.3
 bs4==0.0.2
 cffi==1.17.0
 cryptography==42.0.0
-had @ git+https://github.com/h-akira/had.git@3ef6dc0588624ff594fb6a671ba4accf64cbe5f3
+had @ git+https://github.com/h-akira/had.git@994872281a20a959235fa1be893d44505a0c8440
 Jinja2==3.1.4
 MarkupSafe==2.1.5
 pycparser==2.22
