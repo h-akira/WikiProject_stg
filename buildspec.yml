@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  parameter-store:
+    settings_secret: "/WikiProject/stg/settings_secret"
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - pip install -r requirements.txt -t build/external/python/lib/python3.12/site-packages
+  build:
+    commands:
+      - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      # - had-admin.py -Y settings.json -A add.yaml -H settings.json
+      # - |
+      #   if had-admin.py -x settings.json > /dev/null 2>&1; then
+      #     had-admin.py -u settings.json
+      #   else
+      #     had-admin.py -c settings.json
+      #   fi
+      # - echo "Build completed on `date`"
