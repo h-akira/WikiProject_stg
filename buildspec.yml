@@ -2,7 +2,10 @@ version: 0.2
 
 env:
   parameter-store:
-    settings_secret: "/WikiProject/stg/settings_secret"
+    settings_secret_userPoolID: "/WikiProject/stg/settings_secret/userPoolID"
+    settings_secret_clientID: "/WikiProject/stg/settings_secret/clientID"
+    settings_secret_MAPPING_PATH: "/WikiProject/stg/settings_secret/MAPPING_PATH"
+    settings_secret_DEBUG: "/WikiProject/stg/settings_secret/DEBUG"
 phases:
   install:
     runtime-versions:
@@ -13,8 +16,8 @@ phases:
     commands:
       - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
       - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
-      - python3 build/project/python/lib/python3.12/site-packages/project/settings_secret.py
-      - echo "Build completed on `date`"
+      - python3 ./gen_settings_secret.py -u $settings_secret_userPoolID -c $settings_secret_clientID -m $settings_secret_MAPPING_PATH -d $settings_secret_DEBUG
+      - had-admin.py -h
       # - had-admin.py -Y settings.json -A add.yaml -H settings.json
       # - |
       #   if had-admin.py -x settings.json > /dev/null 2>&1; then
