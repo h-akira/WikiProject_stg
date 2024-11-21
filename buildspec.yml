@@ -13,6 +13,8 @@ phases:
     commands:
       - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
       - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      - python3 build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      - echo "Build completed on `date`"
       # - had-admin.py -Y settings.json -A add.yaml -H settings.json
       # - |
       #   if had-admin.py -x settings.json > /dev/null 2>&1; then
