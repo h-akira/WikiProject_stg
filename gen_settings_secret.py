@@ -49,11 +49,17 @@ def main():
   #   MAPPING_PATH=options.MAPPING_PATH,
   #   DEBUG=options.DEBUG
   # )
+  userPoolID = os.getenv("settings_secret_userPoolID")
+  clientID = os.getenv("settings_secret_clientID")
+  MAPPING_PATH = os.getenv("settings_secret_MAPPING_PATH")
+  if MAPPING_PATH == "None":
+    MAPPING_PATH = ""
+  DEBUG = os.getenv("settings_secret_DEBUG")
   SOURCE = TEMPLATE.format(
-    userPoolID=os.getenv("settings_secret_userPoolID"),
-    clientID="settings_secret_clientID",
-    MAPPING_PATH="settings_secret_MAPPING_PATH",
-    DEBUG="settings_secret_DEBUG"
+    userPoolID=userPoolID,
+    clientID=clientID,
+    MAPPING_PATH=MAPPING_PATH,
+    DEBUG=DEBUG
   )
   with open(FILE_PATH, "w") as f:
     f.write(SOURCE)
