@@ -53,7 +53,7 @@ def main():
     f.write(SOURCE)
   print("File created: ", FILE_PATH)
   print("=== settings_secret.py ===")
-  print("SOURCE")
+  print(SOURCE)
 
 if __name__ == '__main__':
   main()
