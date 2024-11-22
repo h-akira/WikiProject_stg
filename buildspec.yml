@@ -15,8 +15,8 @@ phases:
       - pip install -r requirements.txt -t build/external/python/lib/python3.12/site-packages
   build:
     commands:
-      - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
-      - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      # - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
+      # - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
       - python3 ./gen_settings_secret.py -u $settings_secret_userPoolID -c $settings_secret_clientID -m $settings_secret_MAPPING_PATH -d $settings_secret_DEBUG
       - had-admin.py -D settings.json -A add.yaml
       # - ls /usr/local/bin
