@@ -5,13 +5,13 @@
 
 import sys
 import os
-FILE_PATH = os.path.join(
+DIR_PATH = os.path.join(
   os.path.dirname(
     os.path.abspath(__file__)
   ), 
-  "build/project/python/lib/python3.12/site-packages/project/settings_secret.py"
+  "build/project/python/lib/python3.12/site-packages/project"
 )
-FILE_PATH = "settings_secret_test.py"
+FILE_PATH = os.path.join(DIR_PATH, "settings_secret.py")
 TEMPLAGE = """\
 AWS = {{
   "cognito":{{
@@ -43,6 +43,7 @@ def main():
   if os.path.exists(FILE_PATH):
     print(f"File already exists: {FILE_PATH}")
     sys.exit()
+  os.makedirs(DIR_PATH, exist_ok=True)
   with open(FILE_PATH, "w") as f:
     f.write(
       TEMPLAGE.format(
