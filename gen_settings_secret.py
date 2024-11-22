@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# Created: 2024-11-20 23:59:22
-
 import sys
 import os
 DIR_PATH = os.path.join(
@@ -22,61 +17,21 @@ AWS = {{
 MAPPING_PATH = "{MAPPING_PATH}"
 DEBUG = {DEBUG}
 """
-
-def parse_args():
-  import argparse
-  parser = argparse.ArgumentParser(description="""\
-
-""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
-  parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
-  # parser.add_argument("-u", "--userPoolID", metavar="userPoolID", required=True, help="userPoolID")
-  # parser.add_argument("-c", "--clientID", metavar="clientID", required=True, help="clientID")
-  # parser.add_argument("-m", "--MAPPING_PATH", metavar="MAPPING_PATH", required=True, help="MAPPING_PATH")
-  # parser.add_argument("-d", "--DEBUG", metavar="DEBUG", required=True, help="DEBUG")
-  # parser.add_argument("-", "--", action="store_true", help="")
-  options = parser.parse_args()
-  return options
-
-def main():
-  options = parse_args()
-  if os.path.exists(FILE_PATH):
-    print(f"File already exists: {FILE_PATH}")
-    sys.exit()
-  os.makedirs(DIR_PATH, exist_ok=True)
-  # SOURCE = TEMPLATE.format(
-  #   userPoolID=options.userPoolID,
-  #   clientID=options.clientID,
-  #   MAPPING_PATH=options.MAPPING_PATH,
-  #   DEBUG=options.DEBUG
-  # )
-  MAPPING_PATH = os.getenv("settings_secret_MAPPING_PATH")
-  if MAPPING_PATH == "None":
-    MAPPING_PATH = ""
-  SOURCE = TEMPLATE.format(
-    userPoolID=os.getenv("settings_secret_userPoolID"),
-    clientID=os.getenv("settings_secret_clientID"),
-    MAPPING_PATH=MAPPING_PATH,
-    DEBUG=os.getenv("settings_secret_DEBUG")
-  )
-  # if os.getenv("settings_secret_MAPPING_PATH") == "None":
-  #   SOURCE = TEMPLATE.format(
-  #     userPoolID=os.getenv("settings_secret_userPoolID"),
-  #     clientID=os.getenv("settings_secret_clientID"),
-  #     MAPPING_PATH="",
-  #     DEBUG=os.getenv("settings_secret_DEBUG")
-  #   )
-  # else:
-  #   SOURCE = TEMPLATE.format(
-  #     userPoolID=os.getenv("settings_secret_userPoolID"),
-  #     clientID=os.getenv("settings_secret_clientID"),
-  #     MAPPING_PATH=os.getenv("settings_secret_MAPPING_PATH"),
-  #     DEBUG=os.getenv("settings_secret_DEBUG")
-  #   )
-  with open(FILE_PATH, "w") as f:
-    f.write(SOURCE)
-  print("File created: ", FILE_PATH)
-  print("=== settings_secret.py ===")
-  print(SOURCE)
-
-if __name__ == '__main__':
-  main()
+if os.path.exists(FILE_PATH):
+  print(f"File already exists: {FILE_PATH}")
+  sys.exit()
+os.makedirs(DIR_PATH, exist_ok=True)
+MAPPING_PATH = os.getenv("settings_secret_MAPPING_PATH")
+if MAPPING_PATH == "None":
+  MAPPING_PATH = ""
+SOURCE = TEMPLATE.format(
+  userPoolID=os.getenv("settings_secret_userPoolID"),
+  clientID=os.getenv("settings_secret_clientID"),
+  MAPPING_PATH=MAPPING_PATH,
+  DEBUG=os.getenv("settings_secret_DEBUG")
+)
+with open(FILE_PATH, "w") as f:
+  f.write(SOURCE)
+print("File created: ", FILE_PATH)
+print("=== settings_secret.py ===")
+print(SOURCE)
