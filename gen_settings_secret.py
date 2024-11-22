@@ -49,20 +49,29 @@ def main():
   #   MAPPING_PATH=options.MAPPING_PATH,
   #   DEBUG=options.DEBUG
   # )
-  if os.getenv("settings_secret_MAPPING_PATH") == "None":
-    SOURCE = TEMPLATE.format(
-      userPoolID=os.getenv("settings_secret_userPoolID"),
-      clientID=os.getenv("settings_secret_clientID"),
-      MAPPING_PATH="",
-      DEBUG=os.getenv("settings_secret_DEBUG")
-    )
-  else:
-    SOURCE = TEMPLATE.format(
-      userPoolID=os.getenv("settings_secret_userPoolID"),
-      clientID=os.getenv("settings_secret_clientID"),
-      MAPPING_PATH=os.getenv("settings_secret_MAPPING_PATH"),
-      DEBUG=os.getenv("settings_secret_DEBUG")
-    )
+  MAPPING_PATH = os.getenv("settings_secret_MAPPING_PATH")
+  if MAPPING_PATH == "None":
+    MAPPING_PATH = ""
+  SOURCE = TEMPLATE.format(
+    userPoolID=os.getenv("settings_secret_userPoolID"),
+    clientID=os.getenv("settings_secret_clientID"),
+    MAPPING_PATH=MAPPING_PATH,
+    DEBUG=os.getenv("settings_secret_DEBUG")
+  )
+  # if os.getenv("settings_secret_MAPPING_PATH") == "None":
+  #   SOURCE = TEMPLATE.format(
+  #     userPoolID=os.getenv("settings_secret_userPoolID"),
+  #     clientID=os.getenv("settings_secret_clientID"),
+  #     MAPPING_PATH="",
+  #     DEBUG=os.getenv("settings_secret_DEBUG")
+  #   )
+  # else:
+  #   SOURCE = TEMPLATE.format(
+  #     userPoolID=os.getenv("settings_secret_userPoolID"),
+  #     clientID=os.getenv("settings_secret_clientID"),
+  #     MAPPING_PATH=os.getenv("settings_secret_MAPPING_PATH"),
+  #     DEBUG=os.getenv("settings_secret_DEBUG")
+  #   )
   with open(FILE_PATH, "w") as f:
     f.write(SOURCE)
   print("File created: ", FILE_PATH)
