@@ -16,7 +16,7 @@ TEMPLATE = """\
 AWS = {{
   "cognito":{{
     "userPoolID":"{userPoolID}",
-    "clientID":"{clientID}",
+    "clientID":"{clientID}"
   }}
 }}
 MAPPING_PATH = "{MAPPING_PATH}"
