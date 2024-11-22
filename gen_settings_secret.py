@@ -12,7 +12,7 @@ DIR_PATH = os.path.join(
   "build/project/python/lib/python3.12/site-packages/project"
 )
 FILE_PATH = os.path.join(DIR_PATH, "settings_secret.py")
-TEMPLAGE = """\
+TEMPLATE = """\
 AWS = {{
   "cognito":{{
     "userPoolID":"{userPoolID}",
@@ -33,7 +33,6 @@ def parse_args():
   parser.add_argument("-c", "--clientID", metavar="clientID", required=True, help="clientID")
   parser.add_argument("-m", "--MAPPING_PATH", metavar="MAPPING_PATH", required=True, help="MAPPING_PATH")
   parser.add_argument("-d", "--DEBUG", metavar="DEBUG", required=True, help="DEBUG")
-
   # parser.add_argument("-", "--", action="store_true", help="")
   options = parser.parse_args()
   return options
@@ -44,15 +43,17 @@ def main():
     print(f"File already exists: {FILE_PATH}")
     sys.exit()
   os.makedirs(DIR_PATH, exist_ok=True)
+  SOURCE = TEMPLATE.format(
+    userPoolID=options.userPoolID,
+    clientID=options.clientID,
+    MAPPING_PATH=options.MAPPING_PATH,
+    DEBUG=options.DEBUG
+  )
   with open(FILE_PATH, "w") as f:
-    f.write(
-      TEMPLAGE.format(
-        userPoolID=options.userPoolID,
-        clientID=options.clientID,
-        MAPPING_PATH=options.MAPPING_PATH,
-        DEBUG=options.DEBUG
-      )
-    )
+    f.write(SOURCE)
+  print("File created: ", FILE_PATH)
+  print("=== settings_secret.py ===")
+  print("SOURCE")
 
 if __name__ == '__main__':
   main()
