@@ -29,10 +29,10 @@ def parse_args():
 
 """, formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
-  parser.add_argument("-u", "--userPoolID", metavar="userPoolID", required=True, help="userPoolID")
-  parser.add_argument("-c", "--clientID", metavar="clientID", required=True, help="clientID")
-  parser.add_argument("-m", "--MAPPING_PATH", metavar="MAPPING_PATH", required=True, help="MAPPING_PATH")
-  parser.add_argument("-d", "--DEBUG", metavar="DEBUG", required=True, help="DEBUG")
+  # parser.add_argument("-u", "--userPoolID", metavar="userPoolID", required=True, help="userPoolID")
+  # parser.add_argument("-c", "--clientID", metavar="clientID", required=True, help="clientID")
+  # parser.add_argument("-m", "--MAPPING_PATH", metavar="MAPPING_PATH", required=True, help="MAPPING_PATH")
+  # parser.add_argument("-d", "--DEBUG", metavar="DEBUG", required=True, help="DEBUG")
   # parser.add_argument("-", "--", action="store_true", help="")
   options = parser.parse_args()
   return options
@@ -43,11 +43,17 @@ def main():
     print(f"File already exists: {FILE_PATH}")
     sys.exit()
   os.makedirs(DIR_PATH, exist_ok=True)
+  # SOURCE = TEMPLATE.format(
+  #   userPoolID=options.userPoolID,
+  #   clientID=options.clientID,
+  #   MAPPING_PATH=options.MAPPING_PATH,
+  #   DEBUG=options.DEBUG
+  # )
   SOURCE = TEMPLATE.format(
-    userPoolID=options.userPoolID,
-    clientID=options.clientID,
-    MAPPING_PATH=options.MAPPING_PATH,
-    DEBUG=options.DEBUG
+    userPoolID=os.getenv("settings_secret_userPoolID"),
+    clientID="settings_secret_clientID",
+    MAPPING_PATH="settings_secret_MAPPING_PATH",
+    DEBUG="settings_secret_DEBUG"
   )
   with open(FILE_PATH, "w") as f:
     f.write(SOURCE)
