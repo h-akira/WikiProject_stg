@@ -16,4 +16,4 @@ phases:
   build:
     commands:
       - python3 ./gen_settings_secret.py
-      - had-admin.py -D settings.json -A add.yaml
+      - had-admin.py -D settings.json -A add.yaml --no-wait
