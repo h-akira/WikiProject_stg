@@ -16,4 +16,11 @@ phases:
   build:
     commands:
       - python3 ./gen_settings_secret.py
+      - DIR=$(jq -r ".layer.directory" settings.json)
+      - NAME=$(jq -r ".layer.name" settings.json)
+      - S3_BUCKET=$(jq -r ".S3.bucket" settings.json)
+      - S3_KEY=$(jq -r ".S3.key" settings.json)
+      - aws s3 sync build/static/css s3://$S3_BUCKET/$S3_KEY/CloudFront/static/css --delete
+      - aws s3 sync build/static/js s3://$S3_BUCKET/$S3_KEY/CloudFront/static/js --delete
+      - aws s3 sync build/static/images s3://$S3_BUCKET/$S3_KEY/CloudFront/static/images --delete
       - had-admin.py -D settings.json -A add.yaml --no-wait
