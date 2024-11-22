@@ -18,12 +18,12 @@ phases:
       - echo $settings_secret > build/project/python/lib/python3.12/site-packages/project/settings_secret.py
       - cat build/project/python/lib/python3.12/site-packages/project/settings_secret.py
       - python3 ./gen_settings_secret.py -u $settings_secret_userPoolID -c $settings_secret_clientID -m $settings_secret_MAPPING_PATH -d $settings_secret_DEBUG
-      - ls /usr/local/bin
-      - pip --version
-      - python --version
-      - python3 --version
-      - pip show pycparser
-      - had-admin.py -h
+      - had-admin.py -D settings.json -A add.yaml
+      # - ls /usr/local/bin
+      # - pip --version
+      # - python --version
+      # - python3 --version
+      # - pip show pycparser
       # - had-admin.py -Y settings.json -A add.yaml -H settings.json
       # - |
       #   if had-admin.py -x settings.json > /dev/null 2>&1; then
