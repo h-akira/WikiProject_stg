@@ -7,7 +7,7 @@
 <p>{{ error }}</p>
 <form method="post" action="{{ 'accounts:signup'|url() }}">        
   {{ form.csrf_token }}]
-  {{ form.hidden_tag() }}
+  {# {{ form.hidden_tag() }} #}
   {{ form.username.label }}
   {{ form.username }}
   {{ form.email.label }}
