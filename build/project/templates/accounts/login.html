@@ -15,11 +15,13 @@
   {#   <input type="password" name="passwd" autocomplete="current-password" required id="id_passwd"> #}
   {# </p> #}
   {{ form.csrf_token }}]
-  {# {{ form.hidden_tag() }} #}
-  {{ form.username.label }}
-  {{ form.username }}
-  {{ form.password.label }}
-  {{ form.password }}
+  <p>
+    {{ form.username.label }}
+    {{ form.username }}
+  </p>
+  <p>
+    {{ form.password.label }}
+    {{ form.password }}
   <button type="submit" class="button is-link">ログイン</button>
   {# <a href="{{ 'wiki:index'|url() }}" class="button is-link">ホームに戻る</a> #}
   <a href="{{ 'accounts:signup'|url() }}" class="button is-link is-light">アカウント作成フォーム</a>
