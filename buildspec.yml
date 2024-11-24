@@ -15,6 +15,7 @@ phases:
       - pip install -r requirements.txt -t build/external/python/lib/python3.12/site-packages
   build:
     commands:
+      - echo "Test"
       - echo "Build started on `date`"
       - python3 ./gen_settings_secret.py
       - DIR=$(jq -r ".layer.directory" settings.json)
