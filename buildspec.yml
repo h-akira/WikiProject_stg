@@ -15,6 +15,7 @@ phases:
       - pip install -r requirements.txt -t build/external/python/lib/python3.12/site-packages
   build:
     commands:
+      - echo "Build started on `date`"
       - python3 ./gen_settings_secret.py
       - DIR=$(jq -r ".layer.directory" settings.json)
       - NAME=$(jq -r ".layer.name" settings.json)
@@ -24,3 +25,4 @@ phases:
       - aws s3 sync build/static/js s3://$S3_BUCKET/$S3_KEY/CloudFront/static/js --delete
       - aws s3 sync build/static/images s3://$S3_BUCKET/$S3_KEY/CloudFront/static/images --delete
       - had-admin.py -D settings.json -A add.yaml --no-wait
+      - echo "Build completed on `date`"
