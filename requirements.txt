@@ -1,10 +1,4 @@
 beautifulsoup4==4.12.3
 bs4==0.0.2
-cffi==1.17.0
-had @ git+https://github.com/h-akira/had.git@304cac5309d7c34920f9eb16dd7617c48ea46762
-Jinja2==3.1.4
-MarkupSafe==2.1.5
-pycparser==2.22
-PyJWT==2.9.0
 soupsieve==2.6
-WTForms==3.1.2
+had @ git+https://github.com/h-akira/had.git@2437b2e41316e650f07c46fc4a435abb91554d0e
