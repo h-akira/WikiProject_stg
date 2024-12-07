@@ -24,6 +24,6 @@ phases:
       - aws s3 sync build/static/css s3://$S3_BUCKET/$S3_KEY/CloudFront/static/css --delete
       - aws s3 sync build/static/js s3://$S3_BUCKET/$S3_KEY/CloudFront/static/js --delete
       - aws s3 sync build/static/images s3://$S3_BUCKET/$S3_KEY/CloudFront/static/images --delete
-      - aws s3 sync build/favicon/favicon.ico s3://$S3_BUCKET/$S3_KEY/CloudFront/favicon.ico --delete
+      - aws s3 cp build/favicon/favicon.ico s3://$S3_BUCKET/$S3_KEY/CloudFront/favicon.ico
       - had-admin.py -D settings.json -A add.yaml --no-wait
       - echo "Build completed on `date`"
