@@ -1,4 +1,4 @@
 beautifulsoup4==4.12.3
 bs4==0.0.2
 soupsieve==2.6
-had @ git+https://github.com/h-akira/had.git@9a5d8db2057e07e14715b759e0a00adad5db101f
+had @ git+https://github.com/h-akira/had.git@eaca5695f3f6e6f7f5de3e05dd26e92b43c68328
