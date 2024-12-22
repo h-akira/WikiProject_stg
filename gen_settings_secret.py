@@ -1,5 +1,6 @@
 import sys
 import os
+import boto3
 DIR_PATH = os.path.join(
   os.path.dirname(
     os.path.abspath(__file__)
@@ -9,6 +10,8 @@ DIR_PATH = os.path.join(
 FILE_PATH = os.path.join(DIR_PATH, "settings_secret.py")
 TEMPLATE = """\
 AWS = {{
+  "account": "{account}",
+  "region": "{region}",
   "cognito":{{
     "userPoolID":"{userPoolID}",
     "clientID":"{clientID}"
@@ -25,6 +28,8 @@ MAPPING_PATH = os.getenv("settings_secret_MAPPING_PATH")
 if MAPPING_PATH == "None":
   MAPPING_PATH = ""
 SOURCE = TEMPLATE.format(
+  account=boto3.client('sts').get_caller_identity()["Account"],
+  region=os.getenv("settings_secret_region"),
   userPoolID=os.getenv("settings_secret_userPoolID"),
   clientID=os.getenv("settings_secret_clientID"),
   MAPPING_PATH=MAPPING_PATH,

@@ -6,6 +6,7 @@ env:
     settings_secret_clientID: "/WikiProject/stg/settings_secret/clientID"
     settings_secret_MAPPING_PATH: "/WikiProject/stg/settings_secret/MAPPING_PATH"
     settings_secret_DEBUG: "/WikiProject/stg/settings_secret/DEBUG"
+    settings_secret_region: "/WikiProject/stg/settings_secret/region"
 phases:
   install:
     runtime-versions:
