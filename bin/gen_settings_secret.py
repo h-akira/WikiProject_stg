@@ -36,6 +36,7 @@ SOURCE = TEMPLATE.format(
   region=os.getenv("settings_secret_region"),
   userPoolID=os.getenv("settings_secret_userPoolID"),
   clientID=os.getenv("settings_secret_clientID"),
+  ACM_ARN=os.getenv("settings_secret_ACM_ARN"),
   MAPPING_PATH=MAPPING_PATH,
   DEBUG=os.getenv("settings_secret_DEBUG")
 )
