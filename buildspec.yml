@@ -18,7 +18,7 @@ phases:
   build:
     commands:
       - echo "Build started on `date`"
-      - python3 ./gen_settings_secret.py
+      - python3 ./bin/gen_settings_secret.py
       - DIR=$(jq -r ".layer.directory" settings.json)
       - NAME=$(jq -r ".layer.name" settings.json)
       - S3_BUCKET=$(jq -r ".S3.bucket" settings.json)
