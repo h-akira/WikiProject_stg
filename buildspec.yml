@@ -4,6 +4,7 @@ env:
   parameter-store:
     settings_secret_userPoolID: "/WikiProject/stg/settings_secret/userPoolID"
     settings_secret_clientID: "/WikiProject/stg/settings_secret/clientID"
+    settings_secret_ACM_ARN: "/WikiProject/stg/settings_secret/ACM_ARN"
     settings_secret_MAPPING_PATH: "/WikiProject/stg/settings_secret/MAPPING_PATH"
     settings_secret_DEBUG: "/WikiProject/stg/settings_secret/DEBUG"
     settings_secret_region: "/WikiProject/stg/settings_secret/region"
@@ -26,5 +27,5 @@ phases:
       - aws s3 sync build/static/js s3://$S3_BUCKET/$S3_KEY/CloudFront/static/js --delete
       - aws s3 sync build/static/images s3://$S3_BUCKET/$S3_KEY/CloudFront/static/images --delete
       - aws s3 cp build/favicon/favicon.ico s3://$S3_BUCKET/$S3_KEY/CloudFront/favicon.ico
-      - had-admin.py -D settings.json -A add.yaml --no-wait
+      - had-admin.py -D settings.json --no-wait
       - echo "Build completed on `date`"
